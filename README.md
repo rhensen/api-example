@@ -27,10 +27,16 @@
 ### GET .../api/weather/stats
 #### optional query parameters: 
 min_year
+
 max year
+
 station_id
+
 page (defaults to page 1)
+
 limit (defaults to page 500)
+
+
 ex: 
 ```
 http://0.0.0.0:8080/api/weather/stats?min_year=2000&max_year=2003&station_id=USC00115326
@@ -38,15 +44,21 @@ http://0.0.0.0:8080/api/weather/stats?min_year=2000&max_year=2003&station_id=USC
 
 ### GET .../api/weather
 #### optional query parameters: 
-min_date (ex: '2000-01-03')
+min_date (ex: '2000-01-03') 
+
 max year (ex: '2008-01-03')
+
 station_id ("USC00110072")
+
 page (defaults to page 1)
+
 limit (defaults to page 500)
 
 ### GET.../api/yield
 #### optional query parameters: 
+
 min_year
+
 max year
 
 
