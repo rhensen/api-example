@@ -6,14 +6,19 @@ import os
 import csv 
 import datetime
 
+
 engine = create_engine('sqlite:///database.db')
+conn=engine.connect()
+
 Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
+start=datetime.datetime.now()
+print(f'--LOG: Start Time: {start}')
 
 dir_list = os.listdir('wx_data')
 ids=[x.replace('.txt', "")for x in dir_list]
+
 for file in dir_list: 
-    print(file)
     with open(f'wx_data/{file}') as txt_file:
         data = csv.reader(txt_file, delimiter="\t")
         data = list(data)
@@ -38,10 +43,15 @@ with open(f'yld_data/US_corn_grain_yield.txt') as txt_file:
         for day in data:
             try:
                 yields=Yield(
-                year= datetime.datetime.strptime(day[0], '%Y'),
+                year= int(day[0]),
                 yields= int(day[1]))
                 session = Session()
                 session.add(yields)
                 session.commit()
             except:
                 pass
+end=datetime.datetime.now()
+print(f'--LOG: End Time: {end}')
+print(f'--LOG: Total Upload Time: {end-start}')
+print(f'--LOG: Number of Weather Rows Uploaded: { conn.execute("select count(*) from weather").scalar() }')
+print(f'--LOG: Number of Yield Rows Uploaded: { conn.execute("select count(*) from yields").scalar() }')

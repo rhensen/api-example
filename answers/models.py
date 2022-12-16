@@ -16,7 +16,7 @@ class Weather(Base):
 
 class Yield(Base):
     __tablename__ = "yields"
-    year = Column(DateTime, primary_key=True)
+    year = Column(String, primary_key=True)
     yields = Column(Integer)
 
 class summaryWeather(Base):
